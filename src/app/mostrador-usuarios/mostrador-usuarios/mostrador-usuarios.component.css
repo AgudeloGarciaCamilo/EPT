@@ -1,0 +1,15 @@
+.mostrador-container {
+  height: 100%;
+  width: 100%;
+  background-color: yellow;
+}
+
+.mostrador-container__buscador {
+  height: 10%;
+  background-color: green;
+}
+
+.mostrador-container__resultado-busqueda {
+  height: 100%;
+  background-color: orangered;
+}

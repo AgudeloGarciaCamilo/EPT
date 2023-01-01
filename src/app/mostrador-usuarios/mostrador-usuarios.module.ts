@@ -15,6 +15,9 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    MostradorUsuariosComponent
   ]
 })
 export class MostradorUsuariosModule { }
