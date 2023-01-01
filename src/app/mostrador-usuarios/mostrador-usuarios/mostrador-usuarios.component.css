@@ -1,15 +1,16 @@
 .mostrador-container {
   height: 100%;
   width: 100%;
-  background-color: yellow;
 }
 
 .mostrador-container__buscador {
-  height: 10%;
-  background-color: green;
+  height: 5%;
+  padding: 2%;
+  background-color: var(--azul-oscuro);
 }
 
 .mostrador-container__resultado-busqueda {
-  height: 100%;
-  background-color: orangered;
+  height: 95%;
+  padding: 1%;
+  background-color: var(--azul-muy-oscuro);
 }

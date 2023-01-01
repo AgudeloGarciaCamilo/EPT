@@ -1,0 +1,17 @@
+.github-usuarios-container {
+  height: 100%;
+  width: 90%;
+}
+
+.github-usuarios-container__usuario-y-controles {
+  height: 30%;
+  display: flex;
+  justify-content: space-around;
+  background-color: purple;
+}
+
+.github-usuarios-container__tabla-repositorios {
+  height: 40%;
+  background-color: red;
+}
+

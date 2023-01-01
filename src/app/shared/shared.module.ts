@@ -14,6 +14,11 @@ import { TablaComponent } from './components/tabla/tabla.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    BuscadorComponent,
+    FiltrosComponent,
+    TablaComponent
   ]
 })
 export class SharedModule { }

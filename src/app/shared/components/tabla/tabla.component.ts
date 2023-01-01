@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablaComponent implements OnInit {
 
+  public cabeceras: string[] = [
+    'NOMBRE DEL REPO',
+    'DESCRIPCIÓN',
+    'ENLACE AL REPO',
+    'ESTRELLAS',
+    'LENGUAJES DE PROGRAMACIÓN'
+  ]
+
   constructor() { }
 
   ngOnInit(): void {
