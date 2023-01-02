@@ -29,5 +29,5 @@ export function getGitHubRepositoriosPorUsuarioEndpoint(usuario: string) {
  * @returns String que determina el endpoint de los lenguajes por usuario y repositorio.
  */
 export function getGitHubLenguajesPorRepositorio(usuario: string, nombreRepo: string) {
-  return  `${GITHUB_API_URL}/repos/${usuario}/${nombreRepo}/repos`;
+  return  `${GITHUB_API_URL}/repos/${usuario}/${nombreRepo}/languages`;
 }

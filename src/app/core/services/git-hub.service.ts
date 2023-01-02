@@ -1,24 +1,54 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { catchError, concatMap, forkJoin, map, Observable, of } from 'rxjs';
+import { catchError, concatMap, forkJoin, map, Observable, of, tap } from 'rxjs';
 import { GitHubRepoDTO } from 'src/app/models/github-repo-dto.interface';
 import { GitHubRepoLanguagesDTO } from 'src/app/models/github-repo-languages-dto.interface';
 
 import { GitHubUserDTO } from 'src/app/models/github-user-dto.interface';
 import { InfoUsuarioGitHub, LenguajesProgramacion, RepositorioGitHub, UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
 import { getGitHubLenguajesPorRepositorio, getGitHubRepositoriosPorUsuarioEndpoint, getGitHubUsuarioEndpoint } from '../constants/endpoints.config';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GitHubService {
 
+  private _usuariosBuscados: Map<string, InfoUsuarioGitHub>;
+
   constructor(
+    private _localStorageService: LocalStorageService,
     private _httpService: HttpClient
-  ) { }
+  ) {
+    this._usuariosBuscados = new Map();
+   }
 
   public getInfoUsuarioGitHub(usuario: string): Observable<InfoUsuarioGitHub | null> {
+    if (this._usuariosBuscados.has(usuario)) {
+      return of( this._usuariosBuscados.get(usuario)! );
+    }
+    else {
+      return this._getInfoUsuarioNoBuscadoAun(usuario);
+    }
+  }
+
+  private _getInfoUsuarioNoBuscadoAun(usuario: string): Observable<InfoUsuarioGitHub | null> {
+    const usuarioKey: string = usuario.toLowerCase();
+    const infoUsuario: InfoUsuarioGitHub | null = this._localStorageService.getInfoUsuarioGitHub(usuarioKey);
+    const existeInfoUsuarioEnLocalStorage: boolean = infoUsuario !== null;
+
+    if (existeInfoUsuarioEnLocalStorage) {
+      console.log('Lo cogí desde el LocalStorage');
+      return of(infoUsuario);
+    }
+    else {
+      console.log('Lo cogí desde la API');
+      return this._getInfoUsuarioDesdeApi(usuario);
+    }
+  }
+
+  private _getInfoUsuarioDesdeApi(usuario: string): Observable<InfoUsuarioGitHub | null> {
     const url: string = getGitHubUsuarioEndpoint(usuario);
     const dtoUsuarioRecibido: Observable<GitHubUserDTO> = this._httpService.get<GitHubUserDTO>(url);
 
@@ -26,8 +56,15 @@ export class GitHubService {
       map( (dtoUsuario: GitHubUserDTO) => this._procesarDTOUsuario(dtoUsuario)),
       concatMap( (usuario: UsuarioGitHub) => this._getInfoUsuariosConRepositorios(usuario) ),
       concatMap( (infoUsuario: InfoUsuarioGitHub) => this._obtenerLenguajesProgramacionPorRepositorio(infoUsuario) ),
+      tap((infoUsuario: InfoUsuarioGitHub) => this._guardarInfoUsuarioLocalmente(infoUsuario)),
       catchError( _ => this._responderAnteErrores())
     );
+  }
+
+  private _guardarInfoUsuarioLocalmente(infoUsuario: InfoUsuarioGitHub): void {
+    const usuarioKey: string = infoUsuario.usuario.nombreUsuario.toLowerCase();
+    this._usuariosBuscados.set(usuarioKey, infoUsuario);
+    this._localStorageService.setInfoUsuarioGitHub(usuarioKey, infoUsuario);
   }
 
   private _procesarDTOUsuario(dtoUsuario: GitHubUserDTO): UsuarioGitHub {
@@ -87,7 +124,6 @@ export class GitHubService {
   private _obtenerInformacionUsuariosCompleta(
     infoUsuario: InfoUsuarioGitHub,
     orderedRepoLanguages: GitHubRepoLanguagesDTO[]) : InfoUsuarioGitHub {
-
     infoUsuario.repositorios.forEach( (repositorio: RepositorioGitHub, indice: number) => {
       const lenguajesProcesados: LenguajesProgramacion = {};
       Object.entries(orderedRepoLanguages[indice]).forEach(
