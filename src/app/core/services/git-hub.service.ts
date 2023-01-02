@@ -6,8 +6,15 @@ import { GitHubRepoDTO } from 'src/app/models/github-repo-dto.interface';
 import { GitHubRepoLanguagesDTO } from 'src/app/models/github-repo-languages-dto.interface';
 
 import { GitHubUserDTO } from 'src/app/models/github-user-dto.interface';
-import { InfoUsuarioGitHub, LenguajesProgramacion, RepositorioGitHub, UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
-import { getGitHubLenguajesPorRepositorio, getGitHubRepositoriosPorUsuarioEndpoint, getGitHubUsuarioEndpoint } from '../constants/endpoints.config';
+import {
+  InfoUsuarioGitHub,
+  LenguajesProgramacion,
+  RepositorioGitHub,
+  UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
+import {
+  getGitHubLenguajesPorRepositorio,
+  getGitHubRepositoriosPorUsuarioEndpoint,
+  getGitHubUsuarioEndpoint } from '../constants/endpoints.config';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({

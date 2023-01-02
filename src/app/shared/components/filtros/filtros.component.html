@@ -1,1 +1,11 @@
-<p>filtros works!</p>
+<form [formGroup]="formulario">
+  <fieldset>
+    <!-- <legend>Please select one of the following</legend> -->
+    <div *ngFor="let filtro of filtros">
+      <input [formControlName]="filtro"type="checkbox" name="action" [id]="filtro" [value]="filtro" />
+      <label [for]="filtro"> {{ filtro }}</label>
+    </div>
+  </fieldset>
+</form>
+
+

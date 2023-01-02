@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { FiltrosComponent } from './components/filtros/filtros.component';
 import { TablaComponent } from './components/tabla/tabla.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { TablaComponent } from './components/tabla/tabla.component';
     TablaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     BuscadorComponent,

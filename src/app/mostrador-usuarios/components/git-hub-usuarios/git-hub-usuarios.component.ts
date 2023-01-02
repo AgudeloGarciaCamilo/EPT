@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Filtro } from 'src/app/models/filtro.interface';
+import { RepositorioGitHub, LenguajesProgramacion } from 'src/app/models/info-usuario-github.interface';
+import { MostradorUsuariosService } from '../../services/mostrador-usuarios.service';
 
 @Component({
   selector: 'app-git-hub-usuarios',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GitHubUsuariosComponent implements OnInit {
 
-  constructor() { }
+  @Input() repositorios: RepositorioGitHub[];
+
+  public lenguajesPorRepo: Map<string, LenguajesProgramacion | null> | null;
+  public filtrosLenguaje: Map<string, boolean> | null;
+  public listaFiltrosLenguaje: string[];
+
+
+  constructor(
+    private _mostradoUsuariosService: MostradorUsuariosService,
+  ) {
+    this.repositorios = [];
+    this.lenguajesPorRepo = null;
+    this.filtrosLenguaje = null;
+    this.listaFiltrosLenguaje = [];
+
+  }
 
   ngOnInit(): void {
+    this._prepararInformacionParaMostrar();
+  }
+
+  private _prepararInformacionParaMostrar(): void {
+    this.lenguajesPorRepo = this._mostradoUsuariosService.getLenguajesPorRepo(this.repositorios);
+    this.filtrosLenguaje = this._mostradoUsuariosService.getFiltrosLenguajes(this.repositorios);
+    this.listaFiltrosLenguaje = this._mostradoUsuariosService.getListaFiltrosLenguajes(this.filtrosLenguaje);
+
+    console.log('REPOSITORIOS: ', this.repositorios);
+    console.log('LENGUAJES POR REPO', this.lenguajesPorRepo);
+    console.log('FILTROS: ', this.filtrosLenguaje);
+  }
+
+  public onFiltroCambiado(filtro: Filtro): void {
+    console.log('CAMBIO CAPTADO: ', filtro);
   }
 
 }

@@ -4,7 +4,9 @@
 
     <div class="github-usuarios-container__controles">
       <app-buscador></app-buscador>
-      <app-filtros></app-filtros>
+      <app-filtros [filtros]="listaFiltrosLenguaje"
+        (filtroCambiado)="onFiltroCambiado($event)"
+      ></app-filtros>
     </div>
   </section>
 

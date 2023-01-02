@@ -5,6 +5,7 @@ import { GitHubUsuariosComponent } from './components/git-hub-usuarios/git-hub-u
 import { MostradorUsuariosComponent } from './mostrador-usuarios/mostrador-usuarios.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule
   ],
   exports: [
