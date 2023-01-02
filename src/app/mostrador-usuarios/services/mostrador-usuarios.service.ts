@@ -46,4 +46,8 @@ export class MostradorUsuariosService {
     return Array.from( filtrosLenguaje.keys() );
   }
 
+  public filtrarRepositorios(filtro: string, datos: RepositorioGitHub[]): RepositorioGitHub[] {
+    return datos.filter( (repositorio: RepositorioGitHub) => repositorio.nombre.includes(filtro));
+  }
+
 }

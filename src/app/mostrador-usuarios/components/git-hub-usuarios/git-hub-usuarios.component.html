@@ -15,7 +15,11 @@
   </section>
 
   <section class="github-usuarios-container__tabla-repositorios">
-    <app-tabla></app-tabla>
+    <app-tabla
+      [cabeceras]="cabecerasTabla"
+      [datos$]="controladorRepositoriosActuales$"
+    >
+    </app-tabla>
   </section>
 </div>
 

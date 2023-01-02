@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { CabeceraTabla } from 'src/app/models/cabezera-tabla.interface';
 import { Filtro } from 'src/app/models/filtro.interface';
 import { RepositorioGitHub, LenguajesProgramacion } from 'src/app/models/info-usuario-github.interface';
-import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO } from '../../constants/mostrador-usuarios.constant';
+import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO, CABEZERAS_TABLA, CLAVE_FILTRADO_TABLA } from '../../constants/mostrador-usuarios.config';
 import { MostradorUsuariosService } from '../../services/mostrador-usuarios.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { MostradorUsuariosService } from '../../services/mostrador-usuarios.serv
   templateUrl: './git-hub-usuarios.component.html',
   styleUrls: ['./git-hub-usuarios.component.css']
 })
-export class GitHubUsuariosComponent implements OnInit {
+export class GitHubUsuariosComponent implements OnInit, OnDestroy {
 
   @Input() repositorios: RepositorioGitHub[];
 
@@ -19,6 +21,11 @@ export class GitHubUsuariosComponent implements OnInit {
 
   public placeholderBuscador: string = PLACEHOLDER_BUSCADOR_REPOSITORIO;
   public labelBotonBuscador: string = LABEL_BOTON_BUSCADOR_REPOSITORIO;
+  public cabecerasTabla: CabeceraTabla[] = CABEZERAS_TABLA;
+  // public claveFiltrado: string = CLAVE_FILTRADO_TABLA;
+
+  public controladorRepositoriosActuales$: BehaviorSubject<RepositorioGitHub[]>;
+  // public controladorFiltroActual$: BehaviorSubject<string>;
 
   constructor(
     private _mostradoUsuariosService: MostradorUsuariosService,
@@ -27,7 +34,8 @@ export class GitHubUsuariosComponent implements OnInit {
     this.lenguajesPorRepo = null;
     this.filtrosLenguaje = null;
     this.listaFiltrosLenguaje = [];
-
+    this.controladorRepositoriosActuales$ = new BehaviorSubject<RepositorioGitHub[]>([]);
+    // this.controladorFiltroActual$ = new BehaviorSubject<string>('');
   }
 
   ngOnInit(): void {
@@ -39,6 +47,8 @@ export class GitHubUsuariosComponent implements OnInit {
     this.filtrosLenguaje = this._mostradoUsuariosService.getFiltrosLenguajes(this.repositorios);
     this.listaFiltrosLenguaje = this._mostradoUsuariosService.getListaFiltrosLenguajes(this.filtrosLenguaje);
 
+    this.controladorRepositoriosActuales$.next(this.repositorios);
+
     console.log('REPOSITORIOS: ', this.repositorios);
     console.log('LENGUAJES POR REPO', this.lenguajesPorRepo);
     console.log('FILTROS: ', this.filtrosLenguaje);
@@ -48,8 +58,16 @@ export class GitHubUsuariosComponent implements OnInit {
     console.log('CAMBIO CAPTADO: ', filtro);
   }
 
-  public onFiltrarRepositorioPorNombre(nombreUsuario: string) {
-    console.log('Nuevo usuario: ', nombreUsuario);
+  public onFiltrarRepositorioPorNombre(nombreRepo: string) {
+    console.log('Nuevo usuario: ', nombreRepo);
+    const repositoriosFiltrados: RepositorioGitHub[] = this._mostradoUsuariosService.filtrarRepositorios(
+      nombreRepo,
+      this.repositorios
+    )
+    this.controladorRepositoriosActuales$.next(repositoriosFiltrados);
   }
 
+  ngOnDestroy(): void {
+    this.controladorRepositoriosActuales$.complete();
+  }
 }

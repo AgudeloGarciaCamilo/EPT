@@ -2,14 +2,24 @@
   <table>
     <thead>
       <tr>
-        <th *ngFor="let cabecera of cabeceras">
-          {{ cabecera }}
+        <th *ngFor="let cabecera of cabeceras" (click)="onCabeceraClickada(cabecera)">
+          {{ cabecera.valor }}
         </th>
       </tr>
     </thead>
 
     <tbody>
+      <tr *ngFor="let filaDatos of datosMostrados">
+        <td *ngFor="let cabecera of cabeceras">
+          <div *ngIf="cabecera.id==='lenguajesProgramacion'; else datoNormal">
+            <span> {{ filaDatos[cabecera.id] | lenguajes }} </span>
+          </div>
 
+          <ng-template #datoNormal>
+            <span> {{ filaDatos[cabecera.id] }} </span>
+          </ng-template>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
