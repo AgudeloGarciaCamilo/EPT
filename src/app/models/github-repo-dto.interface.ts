@@ -1,6 +1,6 @@
 import { GitHubUserDTO } from "./github-user-dto.interface";
 
-export interface GitHubReposDTO {
+export interface GitHubRepoDTO {
   id:                          number;
   node_id:                     string;
   name:                        string;

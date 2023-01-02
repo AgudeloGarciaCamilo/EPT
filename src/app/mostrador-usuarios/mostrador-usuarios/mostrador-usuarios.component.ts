@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GitHubService } from 'src/app/core/services/git-hub.service';
 
 @Component({
   selector: 'app-mostrador-usuarios',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MostradorUsuariosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _gitHubService: GitHubService
+  ) { }
 
   ngOnInit(): void {
+    this._gitHubService.getInfoUsuarioGitHub('agudelogarciacamilo').subscribe(info => {
+      console.log('Received Info: ', info);
+    });
   }
 
 }
