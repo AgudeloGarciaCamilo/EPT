@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Filtro } from 'src/app/models/filtro.interface';
 import { RepositorioGitHub, LenguajesProgramacion } from 'src/app/models/info-usuario-github.interface';
+import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO } from '../../constants/mostrador-usuarios.constant';
 import { MostradorUsuariosService } from '../../services/mostrador-usuarios.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class GitHubUsuariosComponent implements OnInit {
   public filtrosLenguaje: Map<string, boolean> | null;
   public listaFiltrosLenguaje: string[];
 
+  public placeholderBuscador: string = PLACEHOLDER_BUSCADOR_REPOSITORIO;
+  public labelBotonBuscador: string = LABEL_BOTON_BUSCADOR_REPOSITORIO;
 
   constructor(
     private _mostradoUsuariosService: MostradorUsuariosService,
@@ -43,6 +46,10 @@ export class GitHubUsuariosComponent implements OnInit {
 
   public onFiltroCambiado(filtro: Filtro): void {
     console.log('CAMBIO CAPTADO: ', filtro);
+  }
+
+  public onFiltrarRepositorioPorNombre(nombreUsuario: string) {
+    console.log('Nuevo usuario: ', nombreUsuario);
   }
 
 }

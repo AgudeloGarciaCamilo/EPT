@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GitHubService } from 'src/app/core/services/git-hub.service';
-import { InfoUsuarioGitHub, LenguajesProgramacion, RepositorioGitHub, UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
-import { MostradorUsuariosService } from '../services/mostrador-usuarios.service';
+import { InfoUsuarioGitHub, RepositorioGitHub, UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
+import { LABEL_BOTON_BUSCADOR_USUARIO, PLACEHOLDER_BUSCADOR_USUARIO } from '../constants/mostrador-usuarios.constant';
 
 @Component({
   selector: 'app-mostrador-usuarios',
@@ -12,6 +12,9 @@ export class MostradorUsuariosComponent implements OnInit {
 
   public usuario: UsuarioGitHub | null;
   public repositorios: RepositorioGitHub[];
+
+  public placeholderBuscador: string = PLACEHOLDER_BUSCADOR_USUARIO;
+  public labelBotonBuscador: string = LABEL_BOTON_BUSCADOR_USUARIO;
 
   constructor(
     private _gitHubService: GitHubService
@@ -32,6 +35,10 @@ export class MostradorUsuariosComponent implements OnInit {
       this.usuario = infoUsuario.usuario;
       this.repositorios = infoUsuario.repositorios;
     }
+  }
+
+  public onBuscarUsuario(nombreUsuario: string) {
+    console.log('Nuevo usuario: ', nombreUsuario);
   }
 
 }

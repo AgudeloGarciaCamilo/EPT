@@ -3,7 +3,11 @@
     <app-usuario></app-usuario>
 
     <div class="github-usuarios-container__controles">
-      <app-buscador></app-buscador>
+      <app-buscador [placeholder]="placeholderBuscador" [labelBoton]="labelBotonBuscador"
+        (inputInsertado)="onFiltrarRepositorioPorNombre($event)"
+      ></app-buscador>
+
+
       <app-filtros [filtros]="listaFiltrosLenguaje"
         (filtroCambiado)="onFiltroCambiado($event)"
       ></app-filtros>

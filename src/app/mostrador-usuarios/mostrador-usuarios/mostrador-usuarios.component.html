@@ -1,6 +1,8 @@
 <section class="mostrador-container">
   <div class="mostrador-container__buscador">
-    <app-buscador></app-buscador>
+    <app-buscador [placeholder]="placeholderBuscador" [labelBoton]="labelBotonBuscador"
+      (inputInsertado)="onBuscarUsuario($event)"
+     ></app-buscador>
   </div>
 
   <div class="mostrador-container__resultado-busqueda">

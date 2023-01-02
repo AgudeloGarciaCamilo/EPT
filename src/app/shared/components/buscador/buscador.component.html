@@ -1,4 +1,6 @@
 <div>
-  <input type="text" placeholder="Placeholder dinámico en proceso...">
-  <button>Buscar</button>
+  <form [formGroup]="formulario">
+    <input type="text" formControlName="input" [placeholder]="placeholder">
+    <button (click)="onClickBoton()">{{ labelBoton }}</button>
+  </form>
 </div>
