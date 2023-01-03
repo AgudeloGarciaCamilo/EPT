@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { BuscadorComponent } from './components/buscador/buscador.component';
 import { FiltrosComponent } from './components/filtros/filtros.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TablaComponent } from './components/tabla/tabla.component';
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { LenguajesPipe } from './pipes/lenguajes.pipe';
 
 
@@ -12,6 +15,7 @@ import { LenguajesPipe } from './pipes/lenguajes.pipe';
   declarations: [
     BuscadorComponent,
     FiltrosComponent,
+    SpinnerComponent,
     TablaComponent,
     LenguajesPipe
   ],
@@ -22,6 +26,7 @@ import { LenguajesPipe } from './pipes/lenguajes.pipe';
   exports: [
     BuscadorComponent,
     FiltrosComponent,
+    SpinnerComponent,
     TablaComponent
   ]
 })

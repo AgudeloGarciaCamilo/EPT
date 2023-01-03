@@ -7,7 +7,24 @@
   </div>
 
   <div class="mostrador-container__resultado-busqueda">
-    <app-git-hub-usuarios [repositorios]="repositorios"></app-git-hub-usuarios>
+    <div *ngIf="estaCargando; then spinner else searchResult"></div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+
+    <ng-template #searchResult>
+      <div *ngIf="usuario===null; then usuarioNoEncontrado else usuarioEncontrado"></div>
+
+      <ng-template #usuarioNoEncontrado>
+        <h1> {{ mensajeUsuarioNull }} </h1>
+      </ng-template>
+
+      <ng-template #usuarioEncontrado>
+        <app-git-hub-usuarios [repositorios]="repositorios"></app-git-hub-usuarios>
+      </ng-template>
+
+    </ng-template>
   </div>
 
 </section>
