@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { pipe, Subject, takeUntil } from 'rxjs';
-import { Filtro } from 'src/app/models/filtro.interface';
+import { Filtros } from 'src/app/models/filtros.interface';
 
 @Component({
   selector: 'app-filtros',
@@ -12,7 +12,7 @@ export class FiltrosComponent implements OnInit, OnDestroy {
 
   @Input() filtros: string[] = [];
 
-  @Output() filtroCambiado: EventEmitter<Filtro>;
+  @Output() filtrosCambiados: EventEmitter<Filtros>;
 
   private _destructorSuscripciones$: Subject<void> = new Subject();
   public formulario: FormGroup;
@@ -21,7 +21,7 @@ export class FiltrosComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder
   ) {
     this.formulario = this._formBuilder.group({});
-    this.filtroCambiado = new EventEmitter();
+    this.filtrosCambiados = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -37,18 +37,11 @@ export class FiltrosComponent implements OnInit, OnDestroy {
 
 
   private _inicializarSuscripciones(): void  {
-    this.filtros.forEach( (filtro: string) => {
-      this.formulario.get(filtro)?.valueChanges
-        .pipe( takeUntil(this._destructorSuscripciones$) )
-        .subscribe( (estaSeleccionado: boolean) => {
-          const cambio: Filtro = {
-            nombre: filtro,
-            activo: estaSeleccionado
-          };
-
-          this.filtroCambiado.emit(cambio);
-        });
-    });
+    this.formulario.valueChanges
+      .pipe( takeUntil(this._destructorSuscripciones$) )
+      .subscribe( (filtros: Filtros) => {
+        this.filtrosCambiados.emit(filtros);
+      });
   }
 
   ngOnDestroy(): void {

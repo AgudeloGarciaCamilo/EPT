@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CabeceraTabla } from 'src/app/models/cabezera-tabla.interface';
-import { Filtro } from 'src/app/models/filtro.interface';
+import { Filtros } from 'src/app/models/filtros.interface';
 import { RepositorioGitHub, LenguajesProgramacion } from 'src/app/models/info-usuario-github.interface';
 import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO, CABEZERAS_TABLA, CLAVE_FILTRADO_TABLA } from '../../constants/mostrador-usuarios.config';
 import { MostradorUsuariosService } from '../../services/mostrador-usuarios.service';
@@ -54,13 +54,20 @@ export class GitHubUsuariosComponent implements OnInit, OnDestroy {
     console.log('FILTROS: ', this.filtrosLenguaje);
   }
 
-  public onFiltroCambiado(filtro: Filtro): void {
-    console.log('CAMBIO CAPTADO: ', filtro);
+  public onFiltroCambiado(filtros: Filtros): void {
+    const repositoriosFiltrados: RepositorioGitHub[] =
+    this._mostradoUsuariosService.filtrarRepositoriosPorLenguajesProgramacion(
+      filtros,
+      this.listaFiltrosLenguaje,
+      this.repositorios,
+      this.lenguajesPorRepo!
+    )
+    this.controladorRepositoriosActuales$.next(repositoriosFiltrados);
   }
 
   public onFiltrarRepositorioPorNombre(nombreRepo: string) {
     console.log('Nuevo usuario: ', nombreRepo);
-    const repositoriosFiltrados: RepositorioGitHub[] = this._mostradoUsuariosService.filtrarRepositorios(
+    const repositoriosFiltrados: RepositorioGitHub[] = this._mostradoUsuariosService.filtrarRepositoriosPorNombre(
       nombreRepo,
       this.repositorios
     )

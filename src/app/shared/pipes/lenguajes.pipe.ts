@@ -7,7 +7,7 @@ import { LenguajesProgramacion } from 'src/app/models/info-usuario-github.interf
 export class LenguajesPipe implements PipeTransform {
 
   transform(lenguajes: LenguajesProgramacion, ...args: unknown[]): unknown {
-    return Object.keys(lenguajes).join(',');
+    return Object.keys(lenguajes).join(', ');
   }
 
 }
