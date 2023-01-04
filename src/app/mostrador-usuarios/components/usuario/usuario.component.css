@@ -16,6 +16,14 @@
 }
 
 .usuario-container__user-info {
-  max-width: 10rem;
+  max-width: 12rem;
   padding-top: 20px;
+}
+
+.usuario-container__nombre {
+  font-size: 1.1em;
+}
+
+.usuario-container__bio {
+  font-size: 0.9em;
 }

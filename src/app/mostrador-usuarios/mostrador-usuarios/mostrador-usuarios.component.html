@@ -1,9 +1,13 @@
 <section class="mostrador-container">
 
   <div class="mostrador-container__buscador">
-    <app-buscador [placeholder]="placeholderBuscador" [labelBoton]="labelBotonBuscador"
+    <div class="mostrador-container__buscador--principal">
+      <app-buscador
+      [placeholder]="placeholderBuscador"
+      [labelBoton]="labelBotonBuscador"
       (inputInsertado)="onBuscarUsuario($event)"
      ></app-buscador>
+    </div>
   </div>
 
   <div class="mostrador-container__resultado-busqueda">
@@ -17,7 +21,9 @@
       <div *ngIf="usuario===null; then usuarioNoEncontrado else usuarioEncontrado"></div>
 
       <ng-template #usuarioNoEncontrado>
-        <h1> {{ mensajeUsuarioNull }} </h1>
+        <div class="mostrador-container__usuario-null">
+          <h1> {{ mensajeUsuarioNull }} </h1>
+        </div>
       </ng-template>
 
       <ng-template #usuarioEncontrado>

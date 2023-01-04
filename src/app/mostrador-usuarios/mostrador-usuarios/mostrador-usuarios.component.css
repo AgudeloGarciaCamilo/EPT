@@ -1,16 +1,32 @@
 .mostrador-container {
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .mostrador-container__buscador {
-  height: 5%;
+  max-height: 10%;
   padding: 2%;
   background-color: var(--azul-oscuro);
 }
 
+.mostrador-container__buscador--principal {
+  width: 70%;
+}
+
 .mostrador-container__resultado-busqueda {
-  height: 95%;
-  padding: 1%;
+  height: 100%;
+  padding: 2%;
+  display: flex;
+  justify-content: flex-start;
   background-color: var(--azul-muy-oscuro);
+}
+
+.mostrador-container__usuario-null {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size:calc(15px + 0.5vw);
+  color: var(--gris-azulado-clarito)
 }

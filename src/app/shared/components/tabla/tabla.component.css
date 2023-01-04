@@ -6,26 +6,30 @@
 }
 
 .tabla-container__tabla {
-  background-color: var(--azul-muy-oscuro);
+  table-layout: fixed;
   height: 100%;
   width: 100%;
+  background-color: var(--azul-muy-oscuro);
   margin-bottom: 20px;
 }
 
 .tabla-container__fila--cabecera {
   border-bottom: 10px solid lightslategrey;
+  word-wrap: break-word;
 }
 
 .tabla-container__cabecera {
   font-size: small;
   padding: 10px 10px;
-  background-color: var(--azul-muy-oscuro);
+  background-color: var(--azul-oscuro);
   color: var(--blanco);
 }
 
 .tabla-container__fila--contenido {
+  word-wrap: break-word;
   height: 100%;
-  border-bottom: 1px solid #9bc3d340;
+  width: 100%;
+  border-bottom: 1px solid var(--azul-oscuro);
 }
 
 .tabla-container__celda {
