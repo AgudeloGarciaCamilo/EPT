@@ -47,30 +47,31 @@ export class MostradorUsuariosService {
     return Array.from( filtrosLenguaje.keys() );
   }
 
-  public filtrarRepositoriosPorNombre(filtro: string, repositorios: RepositorioGitHub[]): RepositorioGitHub[] {
-    return repositorios.filter( (repositorio: RepositorioGitHub) => repositorio.nombre.includes(filtro));
-  }
-
-  public filtrarRepositoriosPorLenguajesProgramacion(
-    filtros: Filtros,
+  public filtrarRepositorios(
+    filtroNombre: string,
+    filtrosLenguajes: Filtros,
     listaFiltrosLenguaje: string[],
     repositorios: RepositorioGitHub[],
     lenguajesPorRepo: Map<string, LenguajesProgramacion | null>
   ): RepositorioGitHub[] {
+    const reposFiltradosPorNombre = repositorios.filter(
+      (repositorio: RepositorioGitHub) => repositorio.nombre.includes(filtroNombre)
+    );
 
-    if ( this._todosLosFiltrosEstanDesactivados(filtros, listaFiltrosLenguaje) ) {
-      return repositorios;
+    if ( this._todosLosFiltrosEstanDesactivados(filtrosLenguajes, listaFiltrosLenguaje) ) {
+      return reposFiltradosPorNombre;
     }
     else {
-      return repositorios.filter(
+      return reposFiltradosPorNombre.filter(
         (repositorio: RepositorioGitHub) => this._debeMostrarseElRepositorio(
-          filtros,
+          filtrosLenguajes,
           listaFiltrosLenguaje,
           repositorio,
           lenguajesPorRepo
         )
       );
     }
+
   }
 
   private _todosLosFiltrosEstanDesactivados(filtros: Filtros, listaFiltrosLenguaje: string[]) {

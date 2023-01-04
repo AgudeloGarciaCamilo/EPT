@@ -30,7 +30,6 @@ export class MostradorUsuariosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._realizarBusquedaUsuarioEnGitHub('agudelogarciacamilo');
   }
 
   private _limpiarInfoUsuario(): void {
@@ -58,7 +57,6 @@ export class MostradorUsuariosComponent implements OnInit, OnDestroy {
   }
 
   private _inicializarMostrador(infoUsuario: InfoUsuarioGitHub | null): void {
-    console.log('Received Info: ', infoUsuario);
     if (infoUsuario !== null) {
       this.usuario = infoUsuario.usuario;
       this.repositorios = infoUsuario.repositorios;

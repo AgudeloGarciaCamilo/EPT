@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CabeceraTabla } from 'src/app/models/cabezera-tabla.interface';
 import { Filtros } from 'src/app/models/filtros.interface';
 import { RepositorioGitHub, LenguajesProgramacion, UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
-import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO, CABEZERAS_TABLA, CLAVE_FILTRADO_TABLA } from '../../constants/mostrador-usuarios.config';
+import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO, CABEZERAS_TABLA } from '../../constants/mostrador-usuarios.config';
 import { MostradorUsuariosService } from '../../services/mostrador-usuarios.service';
 
 @Component({
@@ -20,13 +20,14 @@ export class GitHubUsuariosComponent implements OnInit, OnDestroy {
   public filtrosLenguaje: Map<string, boolean> | null;
   public listaFiltrosLenguaje: string[];
 
+  private _filtroNombreRepoActual: string;
+  private _filtrosLenguajesActuales: Filtros;
+
   public placeholderBuscador: string = PLACEHOLDER_BUSCADOR_REPOSITORIO;
   public labelBotonBuscador: string = LABEL_BOTON_BUSCADOR_REPOSITORIO;
   public cabecerasTabla: CabeceraTabla[] = CABEZERAS_TABLA;
-  // public claveFiltrado: string = CLAVE_FILTRADO_TABLA;
 
   public controladorRepositoriosActuales$: BehaviorSubject<RepositorioGitHub[]>;
-  // public controladorFiltroActual$: BehaviorSubject<string>;
 
   constructor(
     private _mostradoUsuariosService: MostradorUsuariosService,
@@ -37,7 +38,8 @@ export class GitHubUsuariosComponent implements OnInit, OnDestroy {
     this.filtrosLenguaje = null;
     this.listaFiltrosLenguaje = [];
     this.controladorRepositoriosActuales$ = new BehaviorSubject<RepositorioGitHub[]>([]);
-    // this.controladorFiltroActual$ = new BehaviorSubject<string>('');
+    this._filtroNombreRepoActual = '';
+    this._filtrosLenguajesActuales = {};
   }
 
   ngOnInit(): void {
@@ -50,29 +52,26 @@ export class GitHubUsuariosComponent implements OnInit, OnDestroy {
     this.listaFiltrosLenguaje = this._mostradoUsuariosService.getListaFiltrosLenguajes(this.filtrosLenguaje);
 
     this.controladorRepositoriosActuales$.next(this.repositorios);
-
-    console.log('REPOSITORIOS: ', this.repositorios);
-    console.log('LENGUAJES POR REPO', this.lenguajesPorRepo);
-    console.log('FILTROS: ', this.filtrosLenguaje);
   }
 
   public onFiltroCambiado(filtros: Filtros): void {
-    const repositoriosFiltrados: RepositorioGitHub[] =
-    this._mostradoUsuariosService.filtrarRepositoriosPorLenguajesProgramacion(
-      filtros,
-      this.listaFiltrosLenguaje,
-      this.repositorios,
-      this.lenguajesPorRepo!
-    )
-    this.controladorRepositoriosActuales$.next(repositoriosFiltrados);
+    this._filtrosLenguajesActuales = filtros;
+    this._filtrarRepositorios();
   }
 
   public onFiltrarRepositorioPorNombre(nombreRepo: string) {
-    console.log('Nuevo usuario: ', nombreRepo);
-    const repositoriosFiltrados: RepositorioGitHub[] = this._mostradoUsuariosService.filtrarRepositoriosPorNombre(
-      nombreRepo,
-      this.repositorios
-    )
+    this._filtroNombreRepoActual = nombreRepo;
+    this._filtrarRepositorios();
+  }
+
+  public _filtrarRepositorios(): void {
+    const repositoriosFiltrados: RepositorioGitHub[] = this._mostradoUsuariosService.filtrarRepositorios(
+      this._filtroNombreRepoActual,
+      this._filtrosLenguajesActuales,
+      this.listaFiltrosLenguaje,
+      this.repositorios,
+      this.lenguajesPorRepo!
+    );
     this.controladorRepositoriosActuales$.next(repositoriosFiltrados);
   }
 
