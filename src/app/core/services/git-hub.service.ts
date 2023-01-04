@@ -121,11 +121,16 @@ export class GitHubService {
   private _obtenerLenguajesProgramacionPorRepositorio(infoUsuario: InfoUsuarioGitHub): Observable<InfoUsuarioGitHub> {
     const llamadasHttp: Observable<GitHubRepoLanguagesDTO>[] = this._obtenerLLamadasHttpLenguajes(infoUsuario);
 
-    return forkJoin(llamadasHttp).pipe(
-      map( (orderedRepoLanguages: GitHubRepoLanguagesDTO[]) =>
-        this._obtenerInformacionUsuariosCompleta(infoUsuario, orderedRepoLanguages)
-      )
-    );
+    if (llamadasHttp.length > 0) {
+      return forkJoin(llamadasHttp).pipe(
+        map( (orderedRepoLanguages: GitHubRepoLanguagesDTO[]) =>
+          this._obtenerInformacionUsuariosCompleta(infoUsuario, orderedRepoLanguages)
+        )
+      );
+    }
+    else {
+      return of(infoUsuario);
+    }
   }
 
   private _obtenerInformacionUsuariosCompleta(
