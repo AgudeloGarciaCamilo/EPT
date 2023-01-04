@@ -1,0 +1,44 @@
+.tabla-container, table {
+  background-color: white;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tabla-container__tabla {
+  background-color: var(--azul-muy-oscuro);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tabla-container__fila--cabecera {
+  border-bottom: 10px solid lightslategrey;
+}
+
+.tabla-container__cabecera {
+  font-size: small;
+  padding: 10px 10px;
+  background-color: var(--azul-muy-oscuro);
+  color: var(--blanco);
+}
+
+.tabla-container__fila--contenido {
+  border-bottom: 1px solid #9bc3d340;
+}
+
+.tabla-container__celda {
+  font-size: small;
+  padding: 10px 10px;
+  background-color: var(--gris-azulado-clarito);
+  color: var(--azul-muy-oscuro);
+  text-align: center;
+}
+
+.cabecera-fija {
+   overflow: auto;
+   max-height: 15rem;
+}
+
+.cabecera-fija thead th {
+   position: sticky; top: 0; z-index: 1;
+}
+

@@ -1,16 +1,19 @@
-<div class="tabla-container">
-  <table>
+<div class="tabla-container cabecera-fija">
+  <table class="tabla-container__tabla">
     <thead>
-      <tr>
-        <th *ngFor="let cabecera of cabeceras" (click)="onCabeceraClickada(cabecera)">
+      <tr class="tabla-container__fila--cabecera">
+        <th *ngFor="let cabecera of cabeceras"
+          class="tabla-container__cabecera"
+          (click)="onCabeceraClickada(cabecera)"
+        >
           {{ cabecera.valor }}
         </th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let filaDatos of datosMostrados">
-        <td *ngFor="let cabecera of cabeceras">
+      <tr *ngFor="let filaDatos of datosMostrados" class="tabla-container__fila--contenido">
+        <td *ngFor="let cabecera of cabeceras" class="tabla-container__celda">
           <div *ngIf="cabecera.id==='lenguajesProgramacion'; else datoNormal">
             <span> {{ filaDatos[cabecera.id] | lenguajes }} </span>
           </div>

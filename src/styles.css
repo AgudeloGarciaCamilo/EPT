@@ -1,15 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
+  font-family: 'Open Sans', sans-serif;
 }
 
 
-/* Global Variables */
+/* Variables globales */
 :root {
   --verde: #43EC63;
   --azul-oscuro: #374963;
   --azul-muy-oscuro: #222D3D;
+  --gris-azulado-clarito: #D8D3F0;
+  --blanco: white;
 }
