@@ -1,11 +1,13 @@
 .tabla-container, table {
-  background-color: white;
+  background-color: var(--azul-muy-oscuro);
+  height: 100%;
   width: 100%;
   margin-bottom: 20px;
 }
 
 .tabla-container__tabla {
   background-color: var(--azul-muy-oscuro);
+  height: 100%;
   width: 100%;
   margin-bottom: 20px;
 }
@@ -22,6 +24,7 @@
 }
 
 .tabla-container__fila--contenido {
+  height: 100%;
   border-bottom: 1px solid #9bc3d340;
 }
 

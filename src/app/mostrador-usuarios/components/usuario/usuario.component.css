@@ -1,6 +1,7 @@
 .usuario-container  {
   display: flex;
   justify-content: space-between;
+  color: var(--blanco);
 }
 
 .usuario-container__spacer {
