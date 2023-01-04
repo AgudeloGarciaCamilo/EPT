@@ -1,0 +1,14 @@
+.buscador-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.buscador-container__spacer {
+  min-width: 1rem;
+}
+
+.buscador-container__input {
+  width: 90%;
+}

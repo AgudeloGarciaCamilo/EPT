@@ -1,6 +1,7 @@
-<div>
-  <form [formGroup]="formulario">
-    <input type="text" formControlName="input" [placeholder]="placeholder">
-    <button (click)="onClickBoton()">{{ labelBoton }}</button>
-  </form>
-</div>
+<form [formGroup]="formulario" class="buscador-container">
+  <input type="text" formControlName="input" [placeholder]="placeholder" class="buscador-container__input">
+
+  <span class="buscador-container__spacer"></span>
+
+  <button (click)="onClickBoton()">{{ labelBoton }}</button>
+</form>

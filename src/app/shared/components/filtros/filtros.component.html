@@ -1,11 +1,10 @@
-<form [formGroup]="formulario">
-  <fieldset>
-    <!-- <legend>Please select one of the following</legend> -->
-    <div *ngFor="let filtro of filtros">
+<form [formGroup]="formulario" class="filtros-container">
+  <div *ngFor="let filtro of filtros" class="filtros-container__filtro">
+    <div class="filtros-container__checkbox">
       <input [formControlName]="filtro"type="checkbox" name="action" [id]="filtro" [value]="filtro" />
       <label [for]="filtro"> {{ filtro }}</label>
     </div>
-  </fieldset>
+  </div>
 </form>
 
 

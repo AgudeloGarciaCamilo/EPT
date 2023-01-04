@@ -1,4 +1,17 @@
-fieldset {
+.filtros-container {
   overflow: auto;
-  height: 100px;
+  height: 5rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.filtros-container__filtro {
+  flex: 0 0 33.333333%;
+}
+
+.filtros-container__checkbox {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
 }

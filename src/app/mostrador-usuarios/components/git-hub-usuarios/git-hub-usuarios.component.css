@@ -4,10 +4,19 @@
 }
 
 .github-usuarios-container__usuario-y-controles {
-  height: 30%;
+  min-height: 30%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   background-color: purple;
+}
+
+.github-usuarios-container__controles {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-width: 50%;
+  max-width: 60%;
 }
 
 .github-usuarios-container__tabla-repositorios {
