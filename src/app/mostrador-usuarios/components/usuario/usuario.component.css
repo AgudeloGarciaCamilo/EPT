@@ -1,0 +1,20 @@
+.usuario-container  {
+  display: flex;
+  justify-content: space-between;
+}
+
+.usuario-container__spacer {
+  min-width: 1rem;
+}
+
+.usuario-container__avatar {
+  vertical-align: middle;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+}
+
+.usuario-container__user-info {
+  max-width: 10rem;
+  padding-top: 20px;
+}

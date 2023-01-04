@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
+import { DESCRIPCION_GENERICA_IMAGEN } from '../../constants/mostrador-usuarios.config';
 
 @Component({
   selector: 'app-usuario',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioComponent implements OnInit {
 
-  constructor() { }
+  @Input() usuario: UsuarioGitHub | null;
+
+  public descripcionImagen: string = DESCRIPCION_GENERICA_IMAGEN;
+
+  constructor() {
+    this.usuario = null;
+   }
 
   ngOnInit(): void {
   }

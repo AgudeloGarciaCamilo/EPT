@@ -9,6 +9,8 @@ export const BUSQUEDA_NO_INICIADA_MENSAJE = 'Usa el buscador en la parte superio
 export const USUARIO_NO_ENCONTRADO = '¡El usuario no existe!';
 export const RETARDO_CARGA_MILISEGUNDOS = 500;
 
+export const DESCRIPCION_GENERICA_IMAGEN = 'Avatar del usuario de GitHub buscado';
+
 export const CABEZERAS_TABLA: CabeceraTabla[] = [
   {
     id: 'nombre',

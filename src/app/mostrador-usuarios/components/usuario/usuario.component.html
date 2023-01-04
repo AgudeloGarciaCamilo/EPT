@@ -1,1 +1,10 @@
-<p>usuario works!</p>
+<section class="usuario-container">
+  <img [src]="usuario?.urlImagen" [alt]="descripcionImagen" class="usuario-container__avatar">
+
+  <span class="usuario-container__spacer"></span>
+
+  <div class="usuario-container__user-info">
+    <h4> {{ usuario?.nombreUsuario }} </h4>
+    <span class="usuario-container__bio"> {{ usuario?.biografia }} </span>
+  </div>
+</section>

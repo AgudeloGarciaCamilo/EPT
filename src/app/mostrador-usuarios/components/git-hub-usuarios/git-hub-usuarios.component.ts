@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CabeceraTabla } from 'src/app/models/cabezera-tabla.interface';
 import { Filtros } from 'src/app/models/filtros.interface';
-import { RepositorioGitHub, LenguajesProgramacion } from 'src/app/models/info-usuario-github.interface';
+import { RepositorioGitHub, LenguajesProgramacion, UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
 import { PLACEHOLDER_BUSCADOR_REPOSITORIO, LABEL_BOTON_BUSCADOR_REPOSITORIO, CABEZERAS_TABLA, CLAVE_FILTRADO_TABLA } from '../../constants/mostrador-usuarios.config';
 import { MostradorUsuariosService } from '../../services/mostrador-usuarios.service';
 
@@ -13,6 +13,7 @@ import { MostradorUsuariosService } from '../../services/mostrador-usuarios.serv
 })
 export class GitHubUsuariosComponent implements OnInit, OnDestroy {
 
+  @Input() usuario: UsuarioGitHub | null;
   @Input() repositorios: RepositorioGitHub[];
 
   public lenguajesPorRepo: Map<string, LenguajesProgramacion | null> | null;
@@ -30,6 +31,7 @@ export class GitHubUsuariosComponent implements OnInit, OnDestroy {
   constructor(
     private _mostradoUsuariosService: MostradorUsuariosService,
   ) {
+    this.usuario = null;
     this.repositorios = [];
     this.lenguajesPorRepo = null;
     this.filtrosLenguaje = null;

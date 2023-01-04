@@ -29,17 +29,13 @@ export class MostradorUsuariosComponent implements OnInit, OnDestroy {
     this._limpiarInfoUsuario();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._realizarBusquedaUsuarioEnGitHub('agudelogarciacamilo');
+  }
 
-  private _inicializarMostrador(infoUsuario: InfoUsuarioGitHub | null): void {
-    console.log('Received Info: ', infoUsuario);
-    if (infoUsuario !== null) {
-      this.usuario = infoUsuario.usuario;
-      this.repositorios = infoUsuario.repositorios;
-    }
-    else {
-      this.mensajeUsuarioNull = USUARIO_NO_ENCONTRADO;
-    }
+  private _limpiarInfoUsuario(): void {
+    this.usuario = null;
+    this.repositorios = [];
   }
 
   public onBuscarUsuario(nombreUsuario: string) {
@@ -61,9 +57,15 @@ export class MostradorUsuariosComponent implements OnInit, OnDestroy {
       });
   }
 
-  private _limpiarInfoUsuario(): void {
-    this.usuario = null;
-    this.repositorios = [];
+  private _inicializarMostrador(infoUsuario: InfoUsuarioGitHub | null): void {
+    console.log('Received Info: ', infoUsuario);
+    if (infoUsuario !== null) {
+      this.usuario = infoUsuario.usuario;
+      this.repositorios = infoUsuario.repositorios;
+    }
+    else {
+      this.mensajeUsuarioNull = USUARIO_NO_ENCONTRADO;
+    }
   }
 
   ngOnDestroy(): void {

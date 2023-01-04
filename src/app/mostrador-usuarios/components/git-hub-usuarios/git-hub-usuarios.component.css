@@ -6,7 +6,7 @@
 .github-usuarios-container__usuario-y-controles {
   height: 30%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: purple;
 }
 
