@@ -15,3 +15,28 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
 }
+
+/* .filtros-container__checkbox--circular {
+  display: flex;
+  flex-wrap: nowrap;
+} */
+
+input[type="checkbox"]{
+  visibility: hidden;
+  position: absolute;
+}
+input[type="checkbox"] + label:before{
+  height: 10px;
+  width :10px;
+  /* margin-right: 2px; */
+  content: " ";
+  display: inline-block;
+  vertical-align: baseline;
+  border: 2px solid grey;
+}
+input[type="checkbox"]:checked + label:before{
+  background-color: var(--verde);
+}
+input[type="checkbox"] + label:before{
+  border-radius:50%;
+}
