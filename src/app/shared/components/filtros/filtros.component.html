@@ -1,9 +1,8 @@
 <form [formGroup]="formulario" class="filtros-container">
   <div *ngFor="let filtro of filtros" class="filtros-container__filtro">
     <div class="filtros-container__checkbox">
-      <!-- <div class="filtros-container__checkbox--circular"> -->
-        <input [formControlName]="filtro"type="checkbox" name="action" [id]="filtro" [value]="filtro" />
-      <!-- </div> -->
+      <input [formControlName]="filtro"type="checkbox" name="action" [id]="filtro" [value]="filtro" />
+
       <label [for]="filtro"> {{ filtro }}</label>
     </div>
   </div>

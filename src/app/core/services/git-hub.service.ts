@@ -46,11 +46,9 @@ export class GitHubService {
     const existeInfoUsuarioEnLocalStorage: boolean = infoUsuario !== null;
 
     if (existeInfoUsuarioEnLocalStorage) {
-      console.log('Lo cogí desde el LocalStorage');
       return of(infoUsuario);
     }
     else {
-      console.log('Lo cogí desde la API');
       return this._getInfoUsuarioDesdeApi(usuario);
     }
   }
@@ -158,7 +156,6 @@ export class GitHubService {
       return this._httpService.get<GitHubRepoLanguagesDTO>(url);
     });
   }
-
 
   private _responderAnteErrores(): Observable<null> {
     return of(null);

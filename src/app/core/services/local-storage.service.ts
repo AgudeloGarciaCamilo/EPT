@@ -6,7 +6,6 @@ import { InfoUsuarioGitHub } from 'src/app/models/info-usuario-github.interface'
 })
 export class LocalStorageService {
 
-  /** Instancia del Local Storage. */
   private _myLocalStorage: Storage = localStorage;
   constructor() { }
 

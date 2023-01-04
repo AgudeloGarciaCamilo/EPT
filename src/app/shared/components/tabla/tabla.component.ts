@@ -38,7 +38,7 @@ export class TablaComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._destructorSuscripciones$.complete();
+    this._destructorSuscripciones$.next();
     this._destructorSuscripciones$.unsubscribe();
   }
 }

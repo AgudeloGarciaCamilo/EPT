@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UsuarioGitHub } from 'src/app/models/info-usuario-github.interface';
 import { DESCRIPCION_GENERICA_IMAGEN } from '../../constants/mostrador-usuarios.config';
 
@@ -7,7 +7,7 @@ import { DESCRIPCION_GENERICA_IMAGEN } from '../../constants/mostrador-usuarios.
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css']
 })
-export class UsuarioComponent implements OnInit {
+export class UsuarioComponent {
 
   @Input() usuario: UsuarioGitHub | null;
 
@@ -16,8 +16,5 @@ export class UsuarioComponent implements OnInit {
   constructor() {
     this.usuario = null;
    }
-
-  ngOnInit(): void {
-  }
 
 }

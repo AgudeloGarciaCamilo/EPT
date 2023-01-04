@@ -38,5 +38,3 @@ export const CABEZERAS_TABLA: CabeceraTabla[] = [
     esOrdenable: true
   }
 ];
-
-export const CLAVE_FILTRADO_TABLA: string = CABEZERAS_TABLA[0].id;
